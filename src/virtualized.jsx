@@ -27,9 +27,7 @@ function App() {
   }, []);
 
   const onDragEnd = (result) => {
-    const {
-      destination, source, draggableId, type,
-    } = result;
+    const { destination, source, draggableId, type } = result;
 
     if (!destination) {
       return;
@@ -124,7 +122,6 @@ function App() {
     );
   };
 
-
   return (
     <div className="main-container">
       <div className="head">
@@ -135,42 +132,19 @@ function App() {
       </div>
       <div className="right">
         <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable
-            droppableId="all-columns"
-            direction="horizontal"
-            type="column"
-          >
+          <Droppable droppableId="all-columns" direction="horizontal" type="column">
             {(provided) => (
               <Container {...provided.droppableProps} ref={provided.innerRef}>
                 <AutoSizer>
                   {({ width }) => (
-                    <ColumnSizer
-                      columnMaxWidth={298}
-                      columnMinWidth={298}
-                      columnCount={columnCount}
-                      key="GridColumnSizer"
-                      width={width}
-                    >
-                      {({ adjustedWidth, columnWidth, registerChild }) => (
-                        <Grid
-                          ref={registerChild}
-                          columnWidth={columnWidth}
-                          columnCount={columnCount}
-                          height={documentHeight - 51}
-                          cellRenderer={cellRenderer}
-                          rowHeight={documentHeight - 64}
-                          rowCount={1}
-                          width={adjustedWidth}
-                          innerRef={provided.innerRef}
-                        />
-                      )}
+                    <ColumnSizer columnMaxWidth={298} columnMinWidth={298} columnCount={columnCount} key="GridColumnSizer" width={width}>
+                      {({ adjustedWidth, columnWidth, registerChild }) => <Grid ref={registerChild} columnWidth={columnWidth} columnCount={columnCount} height={documentHeight - 51} cellRenderer={cellRenderer} rowHeight={documentHeight - 64} rowCount={1} width={adjustedWidth} innerRef={provided.innerRef} />}
                     </ColumnSizer>
                   )}
                 </AutoSizer>
-                { provided.placeholder }
+                {provided.placeholder}
               </Container>
             )}
-
           </Droppable>
         </DragDropContext>
       </div>

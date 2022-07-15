@@ -20,10 +20,14 @@ const columns = Array.from({ length: numberOfColumns }).map((_, index) => ({
   taskIds: tasks.filter(({ columnId }) => columnId === index).map(({ id }) => id),
 }));
 
-const convertArrayToObject = (array, key, prefix = '') => array.reduce((object, item) => ({
-  ...object,
-  [`${prefix}${item[key]}`]: item,
-}), {});
+const convertArrayToObject = (array, key, prefix = '') =>
+  array.reduce(
+    (object, item) => ({
+      ...object,
+      [`${prefix}${item[key]}`]: item,
+    }),
+    {}
+  );
 
 const initialData = {
   tasks: convertArrayToObject(tasks, 'id'),

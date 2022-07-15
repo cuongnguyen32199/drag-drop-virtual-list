@@ -19,9 +19,7 @@ function App() {
   const [state, setState] = useState(initialData);
 
   const onDragEnd = (result) => {
-    const {
-      destination, source, draggableId, type,
-    } = result;
+    const { destination, source, draggableId, type } = result;
 
     if (!destination) {
       return;
@@ -106,25 +104,18 @@ function App() {
       </div>
       <div className="right">
         <DragDropContext onDragEnd={onDragEnd}>
-          <Droppable
-            droppableId="all-columns"
-            direction="horizontal"
-            type="column"
-          >
+          <Droppable droppableId="all-columns" direction="horizontal" type="column">
             {(provided) => (
               <Container {...provided.droppableProps} ref={provided.innerRef}>
-                {
-                  state.columnOrder.map((columnId, index) => {
-                    const column = state.columns[columnId];
-                    const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
+                {state.columnOrder.map((columnId, index) => {
+                  const column = state.columns[columnId];
+                  const tasks = column.taskIds.map((taskId) => state.tasks[taskId]);
 
-                    return <Column key={column.id} column={column} tasks={tasks} index={index} />;
-                  })
-                }
-                { provided.placeholder }
+                  return <Column key={column.id} column={column} tasks={tasks} index={index} />;
+                })}
+                {provided.placeholder}
               </Container>
             )}
-
           </Droppable>
         </DragDropContext>
       </div>

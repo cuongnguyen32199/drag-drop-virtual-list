@@ -15,20 +15,9 @@ const Container = styled.div`
   margin-bottom: 8px;
 `;
 
-function Task({
-  provided,
-  isDragging,
-  task,
-  style,
-}) {
+function Task({ provided, isDragging, task, style }) {
   return (
-    <Container
-      {...provided.draggableProps}
-      {...provided.dragHandleProps}
-      ref={provided.innerRef}
-      isDragging={isDragging}
-      style={getStyle(provided, style)}
-    >
+    <Container {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} isDragging={isDragging} style={getStyle(provided, style)}>
       <span className="text-bold">{ucFirst(task.id)}</span>
       <span className="text-name">{task.content}</span>
     </Container>
